@@ -3,11 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What Grape Variety Are You?</title>
-    <script src="script.js"></script>
+    <title>Grape Variety Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .quiz-container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        h1 { text-align: center; }
+        .question { margin-bottom: 20px; }
+        .options { list-style-type: none; padding: 0; }
+        .options li { margin: 10px 0; }
+        button { padding: 10px 15px; font-size: 16px; }
+    </style>
 </head>
 <body>
-    <h1>What Grape Variety Are You?</h1>
-    <!-- Quiz content goes here -->
+    <div class="quiz-container">
+        <h1>Grape Variety Quiz</h1>
+        <div class="question" id="question"></div>
+        <ul class="options" id="options"></ul>
+        <button id="next">Next Question</button>
+    </div>
+    <script>
+        const quizData = [
+            { question: "What is your favorite grape variety?", options: ["Chardonnay", "Sauvignon Blanc", "Merlot", "Cabernet Sauvignon"], answer: "Cabernet Sauvignon" },
+            // Add additional questions here following the same format
+            { question: "Grape Variety 1", options: ["Option 1", "Option 2", "Option 3", "Option 4"], answer: "Option 1" },
+            { question: "Grape Variety 2", options: ["Option 1", "Option 2", "Option 3", "Option 4"], answer: "Option 2" },
+            // ... Add all 24 grape varieties as questions
+        ];
+        let currentQuestionIndex = 0;
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const nextButton = document.getElementById('next');
+
+        function loadQuestion() {
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            optionsElement.innerHTML = '';
+            currentQuestion.options.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option;
+                optionsElement.appendChild(li);
+            });
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                alert('Quiz finished!');
+            }
+        });
+
+        loadQuestion();
+    </script>
 </body>
 </html>
